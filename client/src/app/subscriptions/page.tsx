@@ -39,19 +39,17 @@ export default function SubscriptionsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-12 md:py-20">
+    <div className="min-h-screen bg-black text-foreground py-12 md:py-20">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title with Monoton font – white for contrast */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-monoton tracking-tight text-white">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-5xl font-monoton tracking-tight text-white">
             Choose Your Plan
           </h1>
-          <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-md text-muted-foreground max-w-2xl mx-auto">
             Unlock powerful features tailored to your needs. Cancel anytime.
           </p>
         </div>
 
-        {/* 3-column grid of paid plans */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {plans.map((plan) => (
             <Card
@@ -63,17 +61,27 @@ export default function SubscriptionsPage() {
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 text-sm font-medium rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lipstick-red    text-primary-foreground px-4 py-1 text-sm font-medium rounded-full">
                   Most Popular
                 </div>
               )}
 
               <CardHeader className="text-center pb-2">
-                <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                <CardDescription className="mt-1">{plan.description}</CardDescription>
+                <CardTitle className="text-3xl">{plan.name}</CardTitle>
+                <CardDescription className="mt-1">
+                  {plan.description}
+                </CardDescription>
                 <div className="mt-6">
-                  <span className="text-5xl font-bold">{plan.price}</span>
-                  <span className="text-xl text-muted-foreground">{plan.interval}</span>
+                  <span
+                    className={`text-5xl ${
+                      plan.popular ? "text-lipstick-red" : "text-golden-orange"
+                    } font-bold`}
+                  >
+                    {plan.price}
+                  </span>
+                  <span className="text-lg text-muted-foreground">
+                    {plan.interval}
+                  </span>
                 </div>
               </CardHeader>
 
@@ -81,8 +89,8 @@ export default function SubscriptionsPage() {
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
-                      <Check className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span>{feature}</span>
+                      <Check className="h-5 w-5 text-gold flex-shrink-0" />
+                      <span className="text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -91,8 +99,8 @@ export default function SubscriptionsPage() {
               <CardFooter className="pt-6">
                 <Button
                   asChild
-                  size="lg"
-                  className="w-full text-lg"
+                  size="sm"
+                  className="w-full text-sm"
                   variant={plan.popular ? "default" : "outline"}
                 >
                   <Link href={`/subscriptions/checkout/${plan.id}`}>
