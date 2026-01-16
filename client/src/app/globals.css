@@ -95,7 +95,7 @@
 .dark {
   --background: oklch(0.13 0.028 261.692);
   --foreground: oklch(0.985 0.002 247.839);
-  --card: oklch(0.21 0.034 264.665);
+  --card: oklch(100% 0.00011 271.152 / 0.237);
   --card-foreground: oklch(0.985 0.002 247.839);
   --popover: oklch(0.21 0.034 264.665);
   --popover-foreground: oklch(0.985 0.002 247.839);
@@ -136,9 +136,20 @@
 }
 
 @theme {
-  --animate-gradient-shift: gradient-shift 8s ease infinite;
+  --animate-gradient-shift: gradient-shift 32s ease infinite;
 
   @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  --animate-subtle-shift: subtleShift 32s ease-in-out infinite;
+
+  @keyframes subtleShift {
     0%, 100% {
       background-position: 0% 50%;
     }
