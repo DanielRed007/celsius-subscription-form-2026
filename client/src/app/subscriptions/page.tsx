@@ -1,7 +1,9 @@
 // app/subscriptions/page.tsx
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { plans } from "@/lib/data/plans";
+import { SubscriptionPlan } from "@/lib/interfaces/subscription-plan";
+import { ArrowRight, Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -10,34 +12,6 @@ export const metadata = {
 };
 
 export default function SubscriptionsPage() {
-  const plans = [
-    {
-      id: "starter",
-      name: "Starter",
-      price: "$9",
-      interval: "/month",
-      description: "Perfect for individuals and small projects",
-      features: ["Up to 10 projects", "Basic analytics", "Email support", "Standard processing speed"],
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      price: "$29",
-      interval: "/month",
-      description: "Best for professionals and growing teams",
-      features: ["Unlimited projects", "Advanced analytics", "Priority support", "Fast processing", "Custom integrations"],
-      popular: true,
-    },
-    {
-      id: "enterprise",
-      name: "Enterprise",
-      price: "$99",
-      interval: "/month",
-      description: "For large teams and high-volume usage",
-      features: ["Everything in Pro", "Dedicated account manager", "SLA guarantees", "Custom onboarding", "Advanced security"],
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-black text-foreground py-12 md:py-20">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,18 +24,18 @@ export default function SubscriptionsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-4 justify-items-center max-w-6xl mx-auto px-2">
+          {plans.map((plan: SubscriptionPlan) => (
             <Card
               key={plan.id}
-              className={`flex flex-col border-border/50 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] ${
+              className={`flex flex-col border-border/50 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] w-full ${
                 plan.popular
                   ? "border-primary/60 bg-gradient-to-b from-primary/5 to-background shadow-2xl relative"
                   : "bg-card"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lipstick-red    text-primary-foreground px-4 py-1 text-sm font-medium rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lipstick-red font-bold text-primary-foreground px-5 py-2 text-md font-sm rounded-full">
                   Most Popular
                 </div>
               )}
@@ -88,7 +62,7 @@ export default function SubscriptionsPage() {
               <CardContent className="flex-1">
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3">
+                    <li key={feature} className="flex items-center gap-1">
                       <Check className="h-5 w-5 text-gold flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
                     </li>
@@ -96,14 +70,20 @@ export default function SubscriptionsPage() {
                 </ul>
               </CardContent>
 
-              <CardFooter className="pt-6">
+              <CardFooter className="pt-6 flex h-full items-top justify-center">
                 <Button
                   asChild
-                  size="sm"
-                  className="w-full text-sm"
-                  variant={plan.popular ? "default" : "outline"}
+                  size="lg"
+                  className={`text-sm ${
+                    plan.popular ? "bg-lipstick-red" : "bg-golden-orange"
+                  }`}
                 >
                   <Link href={`/subscriptions/checkout/${plan.id}`}>
+                    {plan.popular ? (
+                      <Sparkles className="h-5 w-5" />
+                    ) : (
+                      <ArrowRight className="h-4 w-4" />
+                    )}
                     Select {plan.name}
                   </Link>
                 </Button>

@@ -1,5 +1,6 @@
 // app/page.tsx
 import { Button } from "@/components/ui/button";
+import { Rocket } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -35,18 +36,18 @@ export default function Home() {
             <Button
               size="sm"
               className="
-                text-sm px-6 py-3 rounded-full
-                shadow-2xl hover:shadow-3xl 
+                text-xl px-3 py-7 rounded-full
+                bg-gradient-to-r from-golden-orange via-gold to-lipstick-red
+                hover:from-golden-orange hover:via-gold hover:to-lipstick-red/90
+                text-black font-medium shadow-xl hover:shadow-2xl
                 transition-all duration-300 hover:scale-105
-                bg-gradient-to-r from-lipstick-red via-gold to-lipstick-red/80
-                bg-[length:200%_200%]
-                animate-subtle-shift
-                text-black
-                font-small
               "
               asChild
             >
-              <Link href="/subscriptions">Get Started</Link>
+              <Link href="/subscriptions">
+                <Rocket className="mr-0 h-6 w-6 text-black" />
+                Get Started
+              </Link>
             </Button>
           </div>
 
@@ -75,7 +76,7 @@ export default function Home() {
                 </span>{" "}
                 Stands Out
               </h3>
-              <p className="text-md sm:text-md text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-sm text-muted-foreground leading-relaxed">
                 Lightning-fast performance • Stunning design • Unmatched
                 developer experience • Built for the modern web in 2026
               </p>
