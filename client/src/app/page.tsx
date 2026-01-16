@@ -32,20 +32,19 @@ export default function Home() {
         </div>
 
         <div className="grid h-full grid-rows-[1fr_1fr] gap-0 lg:gap-0">
-          <div className="flex h-full items-center justify-center border-b border-border bg-ring lg:border-r lg:border-b-0">
+          <div
+            className="flex h-full items-center bg-gradient-to-r from-golden-orange via-gold to-lipstick-red
+                hover:from-golden-orange hover:via-gold hover:to-lipstick-red/90
+                text-black font-medium
+                transition-all duration-300 justify-center border-b border-border lg:border-r lg:border-b-0"
+          >
             <Button
               size="sm"
-              className="
-                text-xl px-3 py-7 rounded-full
-                bg-gradient-to-r from-golden-orange via-gold to-lipstick-red
-                hover:from-golden-orange hover:via-gold hover:to-lipstick-red/90
-                text-black font-medium shadow-xl hover:shadow-2xl
-                transition-all duration-300 hover:scale-105
-              "
+              className="text-sm p-3 rounded-none bg-black text-white"
               asChild
             >
               <Link href="/subscriptions">
-                <Rocket className="mr-0 h-6 w-6 text-black" />
+                <Rocket className="mr-0 h-6 w-6 text-white" />
                 Get Started
               </Link>
             </Button>
