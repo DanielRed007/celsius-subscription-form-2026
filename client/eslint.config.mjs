@@ -1,18 +1,27 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+// eslint.config.js
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+export default tseslint.config(
+  js.configs.recommended,                  // ESLint's recommended JS rules
+  ...tseslint.configs.recommended,         // TypeScript recommended rules (good baseline)
+  // ...tseslint.configs.strict,           // Uncomment for stricter TS rules if you want
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],   // Lint these file types
+    languageOptions: {
+      parser: tseslint.parser,             // Use TS parser
+      parserOptions: {
+        project: true,                     // Enables type-aware rules (needs tsconfig.json)
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      // Customize or override rules here, e.g.:
+      // '@typescript-eslint/no-unused-vars': 'warn',
+      // 'no-console': 'off',
+    },
+  },
+  {
+    ignores: ['dist/**', 'node_modules/**', '*.config.js'],  // Common ignores
+  }
+);
