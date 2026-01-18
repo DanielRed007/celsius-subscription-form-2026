@@ -1,15 +1,15 @@
 // app/subscriptions/checkout/[plan]/page.tsx
 
-import { notFound } from "next/navigation";
-import { formatPlanName } from "@/lib/utils/format-utils";
-import CheckoutForm from "./checkout-form"; // your client-side form child
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from "@/components/ui/card";
+import { formatPlanName } from "@/lib/utils/format-utils";
+import { notFound } from "next/navigation";
+import CheckoutForm from "./checkout-form"; // your client-side form child
 
 export default async function CheckoutPage({
   params,
@@ -20,6 +20,7 @@ export default async function CheckoutPage({
 
   const validPlans = ["starter", "pro", "enterprise"] as const;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!validPlans.includes(plan as any)) {
     notFound();
   }
@@ -29,7 +30,7 @@ export default async function CheckoutPage({
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="container max-w-2xl mx-auto px-4">
-        <Card>
+        <Card className="rounded-none">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl">
               Complete Your {planName} Subscription
