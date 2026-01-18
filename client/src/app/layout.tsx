@@ -1,30 +1,20 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Monoton, Red_Hat_Display } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import type { Metadata } from "next";
+import { Monoton, Red_Hat_Display } from "next/font/google";
+import "./globals.css";
 
 const monoton = Monoton({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-monoton',
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-monoton",
 });
 
 const redHatDisplay = Red_Hat_Display({
   variable: "--font-redhat-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500","700"]
-})
+  weight: ["300", "400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Welcome to Celsius",
@@ -38,11 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html 
-      lang="en" 
-      suppressHydrationWarning   // ← Add this here (or keep it if already present)
+    <html
+      lang="en"
+      suppressHydrationWarning // ← Add this here (or keep it if already present)
     >
-      <body 
+      <body
         className={`${monoton.variable} ${redHatDisplay.variable} antialiased`}
       >
         <ThemeProvider
