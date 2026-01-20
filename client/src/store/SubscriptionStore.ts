@@ -4,12 +4,12 @@ import { create } from "zustand";
 
 interface SubscriptionState {
   subscriptions: SubscriptionPlan[] | null;
-  currentSubscription: string | "";
-  setCurrentPlan(plan: string): void;
+  currentSubscription: SubscriptionPlan | null;
+  setCurrentPlan(plan: SubscriptionPlan): void;
 }
 
 export const useSubscriptionStore = create<SubscriptionState>((set) => ({
-  currentSubscription: "",
+  currentSubscription: null,
   subscriptions: plans,
   setCurrentPlan: (plan) =>
     set(() => ({

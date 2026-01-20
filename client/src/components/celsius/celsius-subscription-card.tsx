@@ -21,12 +21,10 @@ interface CelsiusSubscriptionCardProps {
 export default function CelsiusSubscriptionCard({
   plan,
 }: CelsiusSubscriptionCardProps): React.ReactNode {
-  const { setCurrentPlan, currentSubscription } = useSubscriptionStore();
+  const { setCurrentPlan } = useSubscriptionStore();
 
   const setPlan = (plan: SubscriptionPlan) => {
-    setCurrentPlan(plan.id);
-
-    console.log(currentSubscription);
+    setCurrentPlan(plan);
   };
 
   return (
