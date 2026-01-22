@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { formatPlanName } from "@/lib/utils/format-utils";
 import { notFound } from "next/navigation";
-import CheckoutForm from "./checkout-form"; // your client-side form child
+import CheckoutForm from "./checkout-form";
 
 export default async function CheckoutPage({
   params,
