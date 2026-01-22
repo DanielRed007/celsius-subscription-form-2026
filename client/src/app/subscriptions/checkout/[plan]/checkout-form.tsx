@@ -1,14 +1,7 @@
 // app/subscriptions/checkout/[plan]/CheckoutForm.tsx
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { checkoutEmailSchema } from '@/lib/schemas/subscription';
-
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,8 +9,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { CircleDollarSign } from 'lucide-react';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { checkoutEmailSchema } from "@/lib/schemas/subscription";
+import { useCheckoutStore } from "@/store/CheckoutStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleDollarSign } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 type FormValues = z.infer<typeof checkoutEmailSchema>;
 
@@ -27,18 +27,23 @@ interface CheckoutFormProps {
 }
 
 export default function CheckoutForm({ plan, planName }: CheckoutFormProps) {
+  const { setEmail, setSubscriptionPlan } = useCheckoutStore();
   const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(checkoutEmailSchema),
-    defaultValues: { email: '' },
-    mode: 'onChange',
+    defaultValues: { email: "" },
+    mode: "onChange",
   });
 
   const onSubmit = (data: FormValues) => {
     // create Stripe session via server action here
+
+    setEmail(data.email);
+    setSubscriptionPlan(plan);
+
     router.push(
-      `/subscriptions/checkout/${plan}/payment?email=${encodeURIComponent(data.email)}`
+      `/subscriptions/checkout/${plan}/payment?email=${encodeURIComponent(data.email)}`,
     );
   };
 
@@ -52,7 +57,11 @@ export default function CheckoutForm({ plan, planName }: CheckoutFormProps) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Your mail" {...field} className="rounded-none" />
+                <Input
+                  placeholder="Your mail"
+                  {...field}
+                  className="rounded-none"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
